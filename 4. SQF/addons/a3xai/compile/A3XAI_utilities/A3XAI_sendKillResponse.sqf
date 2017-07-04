@@ -1,10 +1,10 @@
 #include "\A3XAI\globaldefines.hpp"
 
-private ["_killer", "_victim", "_killerRespectPoints", "_fragAttributes", "_killerPlayerUID", "_lastKillAt", "_vehicleKiller", "_killStack", "_distance", "_distanceBonus", "_overallRespectChange", "_newKillerScore", "_killMessage", "_newKillerFrags","_collision"];
+private ["_killer", "_victim", "_killerRespectPoints", "_fragAttributes", "_killerPlayerUID", "_lastKillAt", "_vehicleKiller", "_killStack", "_distance", "_distanceBonus", "_overallRespectChange", "_newKillerScore", "_killMessage", "_newKillerFrags"/*,"_collision"*/];
 
 _killer 	= _this select 0;
 _victim 	= _this select 1;
-_collision 	= _this select 2;
+//_collision 	= _this select 2;
 
 _fragAttributes = [];
 _killerPlayerUID = getPlayerUID _killer;
@@ -27,39 +27,39 @@ if (A3XAI_enableRespectRewards) then {
 			};
 		} else {
 			if (A3XAI_respectFragged > 0) then {
-				//_fragAttributes pushBack "ENEMY FRAGGED";
-				_fragAttributes pushBack "ENEMY AI FRAGGED";
+				//_fragAttributes pushBack "Enemy Fragged";
+				_fragAttributes pushBack "Enemy AI Fragged";
 				//_killerRespectPoints pushBack ["ENEMY FRAGGED", A3XAI_respectFragged];
 				_killerRespectPoints pushBack ["ENEMY AI FRAGGED", A3XAI_respectFragged];
 			};
 		};
 	} else {
-		if (_collision) then {
-			call {
-				if (_vehicleKiller isKindOf "ParachuteBase") exitWith {
-					if (A3XAI_respectChute > 0) then {
-						_fragAttributes pushBack "Chute > Chopper";
-						_killerRespectPoints pushBack ["CHUTE > CHOPPER", A3XAI_respectChute];
-					};
-				};
-				if (_vehicleKiller isKindOf "Air") exitWith {
-					if (A3XAI_respectBigBird > 0) then {
-						_fragAttributes pushBack "Big Bird";
-						_killerRespectPoints pushBack ["BIG BIRD", A3XAI_respectBigBird];
-					};
-				};
-				if (A3XAI_respectRoadkill > 0) then {
-					_fragAttributes pushBack "Road Kill";
-					_killerRespectPoints pushBack ["Road Kill", A3XAI_respectRoadkill];
+			if (_vehicleKiller isKindOf "ParachuteBase") exitWith {
+				if (A3XAI_respectChute > 0) then {
+					_fragAttributes pushBack "Chute > Chopper";
+					_killerRespectPoints pushBack ["CHUTE > CHOPPER", A3XAI_respectChute];
 				};
 			};
-		} else {
+
+			if (_vehicleKiller isKindOf "Air") exitWith {
+				if (A3XAI_respectBigBird > 0) then {
+					_fragAttributes pushBack "Big Bird";
+					_killerRespectPoints pushBack ["BIG BIRD", A3XAI_respectBigBird];
+				};
+			};
+
+			if ((driver _vehicleKiller) isEqualTo _killer) exitWith {
+				if (A3XAI_respectRoadkill > 0) then {
+					_fragAttributes pushBack "Road Kill";
+					_killerRespectPoints pushBack ["ROAD KILL", A3XAI_respectRoadkill];
+				};
+			};				
+
 			if (A3XAI_respectLetItRain > 0) then {
 				_fragAttributes pushBack "Let it Rain";
 				_killerRespectPoints pushBack ["LET IT RAIN", A3XAI_respectLetItRain];
 			};
 		};
-	};
 	
 	_lastKillAt = _killer getVariable ["A3XAI_LastKillAt", 0];
 	_killStack = _killer getVariable ["A3XAI_KillStack", 0];
@@ -106,7 +106,8 @@ if (A3XAI_enableRespectRewards) then {
 
 
 if (A3XAI_enableDeathMessages) then {
-	_killMessage = format ["%1 was killed by %2", _victim getVariable ["bodyName","Bandit"], (name _killer)];
+	//_killMessage = format ["%1 was killed by %2", _victim getVariable ["bodyName","Bandit"], (name _killer)];
+	_killMessage = format ["%1 was killed by %2", (name _victim), (name _killer)];
 
 	if !(_fragAttributes isEqualTo []) then {
 		_killMessage = _killMessage + " (";

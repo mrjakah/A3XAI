@@ -30,7 +30,7 @@ try {
 		};
 	};
 } catch {
-	_victim call A3XAI_purgeUnitGear;
+	//_victim call A3XAI_purgeUnitGear;
 	if (A3XAI_debugLevel > 0) then {
 		diag_log _exception;
 	};

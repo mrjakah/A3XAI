@@ -77,6 +77,7 @@ call {
 
 //Set variables
 _vehicle setVariable ["unitGroup",_unitGroup];
+_vehicle setVariable ["ExileIsPersistent", false];
 
 //Determine vehicle type and add needed eventhandlers
 if (_isAirVehicle) then {

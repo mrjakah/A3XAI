@@ -110,16 +110,16 @@ class CfgA3XAISettings {
 	--------------------------------------------------------------------------------------------------------------------*/	
 	
 	//Sets side/faction for AI spawned by A3XAI. If A3XAI units are hostile with AI spawned from other install addons, consider changing this setting. Acceptable sides: east or west (Default: east)
-	side = east;
+	side = EAST;
 	
 	//Number of online players required for maximum (or minimum) AI spawn chance. Affects Static, Dynamic, Random AI spawns. (Default: 10)	
 	playerCountThreshold = 10;
 	
 	//1: Spawn chance multiplier scales upwards from value defined by chanceScalingThreshold to 1.00. 0: Spawn chance multiplier scales downwards from 1.00 to chanceScalingThreshold.
-	upwardsChanceScaling = 1;
+	upwardsChanceScaling = 0;
 	
 	//If upwardsChanceScaling is 1: Initial spawn chance multiplier. If upwardsChanceScaling is 0: Final spawn chance multiplier. (Default: 0.50)
-	chanceScalingThreshold = 0.50;
+	chanceScalingThreshold = 0.25;
 	
 	//(Static/Dynamic/Random Spawns) minAI: Minimum number of units. addAI: maximum number of additional units. unitLevel: Unit level (0-3)
 	minAI_village = 1;
@@ -170,10 +170,10 @@ class CfgA3XAISettings {
 	levelRequiredLauncher = -1;
 	
 	//List of launcher-type weapons that AI can use.
-	launcherTypes[] = {"launch_NLAW_F","launch_RPG32_F","launch_B_Titan_F","launch_I_Titan_F","launch_O_Titan_F","launch_B_Titan_short_F","launch_I_Titan_short_F","launch_O_Titan_short_F"}; 
+	launcherTypes[] = {/*"launch_NLAW_F","launch_RPG32_F","launch_B_Titan_F","launch_I_Titan_F","launch_O_Titan_F","launch_B_Titan_short_F","launch_I_Titan_short_F","launch_O_Titan_short_F"*/}; 
 	
 	//Maximum number of launcher weapons allowed per group (Default: 1)
-	launchersPerGroup = 1;
+	launchersPerGroup = 0;
 	
 	//Enable or disable AI self-healing. Level 0 AI cannot self-heal. Affects: All AI infantry units (Default: 1).
 	enableHealing = 1;
@@ -183,10 +183,10 @@ class CfgA3XAISettings {
 	removeExplosiveAmmo = 1;
 	
 	//if enabled, AI units suffer no damage from vehicle collisions. (Default: 1)
-	noCollisionDamage = 1;
+	noCollisionDamage = 0;
 	
 	//If enabled, AI killed by vehicle collisions will have their gear removed (Default: 1)
-	roadKillPenalty = 1;
+	roadKillPenalty = 0;
 	
 	//Array of positions defining trader locations. AI will be non-hostile and damage immune around this area.
 	//Use this if your server is not using the standard Exile trader markers or sensors in mission.sqm
@@ -202,7 +202,7 @@ class CfgA3XAISettings {
 	
 	//Enable or disable static AI spawns. If enabled, AI spawn points will be generated in cities, towns, and other named areas.
 	//Enabled: A3XAI automatically generates static spawns at named locations on map. Disabled: No static spawns will be generated. (Default: 1)
-	enableStaticSpawns = 1;
+	enableStaticSpawns = 0;
 	
 	//Set minimum and maximum wait time (seconds) to respawn an AI group after all units have been killed. Applies to both static AI and custom spawned AI (Default: Min 300, Max 600).									
 	respawnTimeMin = 300;
@@ -224,7 +224,7 @@ class CfgA3XAISettings {
 	--------------------------------------------------------------------------------------------------------------------*/		
 
 	//Upper limit of dynamic spawns on map at once. Set to 0 to disable dynamic spawns (Default: 15)
-	maxDynamicSpawns = 15;
+	maxDynamicSpawns = 0;
 	
 	//Minimum time (in seconds) that must pass between dynamic spawns for each player (Default: 900)
 	timePerDynamicSpawn = 900;
@@ -260,10 +260,10 @@ class CfgA3XAISettings {
 	--------------------------------------------------------------------------------------------------------------------*/
 
 	//Time to wait (seconds) before despawning disabled/destroyed AI vehicles. If vehiclesAllowedForPlayers is enabled, this timer is cleared once a player enters the vehicle. (Default: 600)
-	vehicleDespawnTime = 600;
+	vehicleDespawnTime = 900;
 	
 	//Enable player use of AI vehicles. Players must either disable the vehicle or kill all units of the group in order to access the vehicle. (Default: 0)
-	vehiclesAllowedForPlayers = 0;
+	vehiclesAllowedForPlayers = 1;
 	
 	//Add name of location as displayed on map prevent AI vehicle patrols from travelling to these locations. Location names are case-sensitive. Note: Vehicles may still pass through these areas
 	//Example: waypointBlacklistAir[] = {"Aggelochori","Panochori","Zaros"};
@@ -325,7 +325,7 @@ class CfgA3XAISettings {
 	--------------------------------------------------------------------------------------------------------------------*/	
 
 	//Global maximum number of active AI land vehicle patrols. Set at 0 to disable (Default: 0).	
-	maxLandPatrols = 0;
+	maxLandPatrols = 5;
 	
 	//Probability of spawning Level 0/1/2/3 AI land vehicle spawns. Probabilities should add up to 1.00		
 	levelChancesLand[] = {0.00,0.50,0.35,0.15};
@@ -354,7 +354,40 @@ class CfgA3XAISettings {
 		{"Exile_Car_Van_Fuel_Black",5},
 		{"Exile_Car_Zamak",5},
 		{"Exile_Car_Tempest",5},
-		{"Exile_Car_HEMMT",5}
+		{"Exile_Car_HEMMT",5},
+		
+		// Additional Vehicles		
+		{"B_GEN_Offroad_01_gen_F",5},
+		{"C_Offroad_02_unarmed_F",5},
+		{"I_C_Offroad_02_unarmed_F",5},
+		{"Exile_Car_LandRover_Green",5},
+		{"Exile_Car_LandRover_Red",5},
+		{"Exile_Car_LandRover_Urban",5},
+		{"Exile_Car_LandRover_Desert",5},
+		{"Exile_Bike_QuadBike_Black",5},
+		{"Exile_Car_UAZ_Open_Green",5},
+		{"Exile_Car_SUV_Black",5},
+		{"Exile_Car_SUV_Orange",5},
+		{"Exile_Car_SUV_Rusty1",5},
+		{"Exile_Car_SUV_Rusty2",5},
+		{"Exile_Car_SUV_Rusty3",5},
+		{"Exile_Car_Offroad_Guerilla01",5},
+		{"Exile_Car_Offroad_Guerilla02",5},
+		{"Exile_Car_Offroad_Guerilla03",5},
+		{"Exile_Car_Offroad_Guerilla04",5},
+		{"Exile_Car_Offroad_Guerilla05",5},
+		{"Exile_Car_Offroad_Guerilla06",5},
+		{"Exile_Car_Offroad_Guerilla07",5},
+		{"Exile_Car_Offroad_Guerilla08",5},
+		{"Exile_Car_Offroad_Guerilla09",5},
+		{"Exile_Car_Offroad_Guerilla10",5},
+		{"Exile_Car_Offroad_Guerilla11",5},
+		{"Exile_Car_Offroad_Guerilla12",5},
+		{"B_LSV_01_unarmed_black_F",5},
+		{"O_T_LSV_02_unarmed_black_F",5},
+		{"O_T_Truck_03_device_ghex_F",5},
+		{"Exile_Car_Offroad_Armed_Guerilla12",5},
+		{"Exile_Car_Offroad_Armed_Guerilla03",5}
 	};
 	
 	//Maximum number of gunner units per land vehicle. Limited by actual number of available gunner positions. (Default: 2)
@@ -374,7 +407,7 @@ class CfgA3XAISettings {
 	--------------------------------------------------------------------------------------------------------------------*/
 
 	//Maximum allowed number of simultaneous active reinforcements (Default: 5)
-	maxAirReinforcements = 5;
+	maxAirReinforcements = 0;
 	
 	//Air vehicles to use as reinforcement vehicles. Default: {"B_Heli_Transport_01_F","B_Heli_Light_01_armed_F"}
 	//Armed air vehicles will detect and engage players within reinforcement area. Unarmed air vehicles will deploy an AI paradrop group.
